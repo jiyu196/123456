@@ -2,6 +2,7 @@ package student;
 
 public class StudentMain {
 	public static void main(String[] args) {
+		StudentService service = StudentService.getInstance();
 //		//사용자로부터 문자열 입력을 받고 싶음
 //		String str = StudentUtils.nextLine("값을 입력하세요 > ");
 //		System.out.println(str);

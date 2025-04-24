@@ -105,19 +105,62 @@ public class Student {
 	
 	public String toString() {
 		return String.format("%5d %5s %5d %5d %5d %6.2f %5d", no, name, kor, eng, mat, avg(),total()) ;
-	}
-//	double avgSub() {
-//		return (totkor+toteng+totmat)/count;   //...
-//	}
-	
-	
-//	int avgSub() {
-//		return 
-//	}
-	
-
 		
+	}
+//	@Override
+//	public int compareTo(Student o) {
+//		//TODO Auto-generated method stub
+//		return name.compareTo(o.name);
+//	}
 	
+	public static Builder builder() {
+		return new Builder();
+	}
+	private static class Builder {
+		private int no;
+		private String name;
+		private int kor;
+		private int eng;
+		private int mat;
+		
+		public Builder no(int no) {
+			this.no = no;
+			return this;
+		}
+		public Builder name(String name) {
+			this.name = name;
+			return this;
+		}
+		public Builder kor(int kor) {
+			this.kor = kor;
+			return null;
+		}
+		public Builder eng(int eng) {
+			this.eng = eng;
+			return this;
+		}
+		public Builder mat(int mat) {
+			this.mat = mat;
+			return this;
+		}
+		
+		public Student build() {
+			return new Student(this);
+		}
+	}
+	
+		private Student(Builder builder) {
+			this.no = builder.no;
+			this.name = builder.name;
+			this.kor = builder.kor;
+			this.eng = builder.eng;
+			this.mat = builder.mat;
+		}
+
+	public static void main(String[] args) {
+		Student student = Student.builder().no(1).name("새똥이").kor(90).build();  //build 반환했을 때 학생이 되어야함
+		System.out.println(student);
+	}
 	
 	public Student(int no, String name,int kor, int eng, int mat, int avgSub, int seq){  //이게 기본 생성자+두번째 생성자?
 		this(no,name);   

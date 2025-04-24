@@ -1,12 +1,20 @@
 package student;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StudentService {
+
+
+public class StudentService implements Comparable<Student>{
 	// 1. 학생 예제의 배열 > 리스트로 교체
 	// 2. 이름 유효성을 정규표현식으로 교체
 
@@ -20,10 +28,11 @@ public class StudentService {
 	// 등록 학생수 count  사용 안함
 
 	{
-		students.add(new Student(1, "개똥이", randomScore(), randomScore(), randomScore())); //학생 인스턴스를 strudents에 입력합자
-		students.add(new Student(2, "새똥이", randomScore(), randomScore(), randomScore()));
-		students.add(new Student(3, "말똥이", randomScore(), randomScore(), randomScore()));
-		students.add(new Student(4, "소똥이", randomScore(), randomScore(), randomScore()));
+//		students.add(new Student(1, "개똥이", randomScore(), randomScore(), randomScore())); //학생 인스턴스를 strudents에 입력합자
+		students.add(Student.builder().no(1).name("개똥이).kor(randomScore()).eng(randomScore()).mat(randomScore()).build()
+//		students.add(new Student(2, "새똥이", randomScore(), randomScore(), randomScore()));
+//		students.add(new Student(3, "말똥이", randomScore(), randomScore(), randomScore()));
+//		students.add(new Student(4, "소똥이", randomScore(), randomScore(), randomScore()));
 
 		sortedStudents = new ArrayList<Student>(students);  //다른방법으로는 생성자 사용
 		//sortedStudents = students.clone();  // sortedStudents에 모든 students를 넣어라
@@ -33,7 +42,14 @@ public class StudentService {
 		//sortedStudents.addAll(students);  addAll은 다른 리스트를 추가하는거
 		rank(); // 클론은 지원하지 않아서 다른 표현을 생각해야함
 	}
-
+	private StudentService studentService = new StudentService();
+	private StudentService() {
+	
+	}
+	public static StudentService getInstance(); {
+		return studentService; 
+	}
+	
 	public int randomScore() {
 
 		return (int) (Math.random() * 41 + 60);
@@ -217,25 +233,47 @@ public class StudentService {
 		System.out.println("수학 평균" + avgMat);
 		System.out.println("전체 평균" + avgAll);
 	}
+	
+
+
 
 	// 석차
-	public void rank() {
+	public void rank() {  //학생들에대한것도 들어가야하기 때문에 integer로만은 안됨
+    //1. List.sort()  comparator인스턴스를 정의한다
+	//2. TreeSet() 이름순
+		sortedStudents = new ArrayList<Student>()
+	//3. Collections
+//		Collections.sort(sortedStudents, (o1, 02) ->.total() - o1.total()); //comparable있어야함
+//		sortedStudents.sort(new Comparator<T>() {
+//			
+//			
+//		
+//			
+//			@Override
+//			public int compare(Object o1, Object o2) {
+//				// TODO Auto-generated method stub
+//				
+//				return 0;
+//				
+//		});
 		
-		for (int i = 0; i <sortedStudents.size() - 1; i++) {
-
-			int idx = i; // 인덱스값초기화
-
-			for (int j = 1 + i; j < sortedStudents.size(); j++) { // 비교해서 상호교환하는
-				if (sortedStudents.get(idx).total() > sortedStudents.get(j).total()) { // 여기 부등호 바꾸면 내림차순이 됨.
-					idx = j; // 여기까지 한번해서 탐색함.
-				}
-			}
-			Student tmp = sortedStudents.get(i);
-			sortedStudents.set(i,sortedStudents.get(idx));              //card deck에서 했던
-			sortedStudents.set(idx,tmp);
-
-		}
-
+//		sortedStudents = new ArrayList<>()
+//		Set<Integer> set = new TreeSet<>();
+//		set.add(sortedStudents.size());
+//		System.out.println(set);
+////		
+////		Set<Integer> set = new TreeSet<Integer>();
+////		while(sortedStudents.size()==students) {
+////			
+////		}
+//		System.out.println(set);
+////		Set<Addr> set2 = new TreeSet<>();
+////		set2.add(new Addr(sortedStudents.size(),students));
+	
+//		
+//
+	}
+		
 	}
 
 }
